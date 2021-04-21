@@ -14,8 +14,9 @@ void setup(){
   // Shaders manager
   shaders = new HashMap<String, PShader>();
   shaders.put("Rainbow", loadShader("shaders/rainbow.glsl"));
+  shaders.put("Hourglass", loadShader("shaders/hourglass.glsl"));
   
-  currentMode = "Rainbow";
+  currentMode = "Hourglass";
 }
 
 void draw(){
@@ -30,4 +31,9 @@ void loadShade(){
   currentShader.set("u_time", millis() / 1000.0);
   rect(0, 0, width, height);
   shader(currentShader);
+}
+
+void keyPressed(){
+  if(keyCode == '1') currentMode = "Rainbow";
+  if(keyCode == '2') currentMode = "Hourglass";
 }
