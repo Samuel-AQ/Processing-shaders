@@ -29,9 +29,9 @@ void main() {
         right_limit -= increment;
         y_pointer += increment;
         if(gl_FragCoord.x > left_limit && gl_FragCoord.x < right_limit && gl_FragCoord.y < y_pointer){
-            if(check_time(0.5, 0.3, 0.5, 0.3, st.y)) continue;
-            if(check_time(0.3, 0.1, 0.3, 0.1, st.y)) continue;
-            if(check_time(0.1, 0.0, 0.1, 0.0, st.y)) continue;
+            if(check_time(0.5, 0.3, 0.5, 0.0, st.y)) continue;
+            if(check_time(0.6, 0.5, 0.3, 0.0, st.y)) continue;
+            if(check_time(0.8, 0.6, 0.1, 0.0, st.y)) continue;
         }
     }
     
