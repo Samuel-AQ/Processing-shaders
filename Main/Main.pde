@@ -31,7 +31,7 @@ void loadShade(){
   currentShader.set("u_time", millis() / 1000.0);
   rect(0, 0, width, height);
   shader(currentShader);
-  println(sin(millis() /1000.0));
+  println(abs(sin(millis() /1000.0)));
 }
 
 void keyPressed(){
