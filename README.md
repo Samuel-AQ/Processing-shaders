@@ -21,6 +21,10 @@ This application has been developed according to the principles of Jakob Nielsen
 
 * An attempt to make the help screen be callable at every moment was tried, but due to the shaders behaviour it was not possible because of the shader pixel modifications mades the helps screen looks unstable. As a solution, the help screen is only callable through the title screen when the shaders have not been run.
 
+## Demonstration
+
+* [Demonstration gif](https://github.com/Samuel-AQ/Processing-shaders/blob/master/Main/data/images/demonstration.gif?raw=true)
+
 ## References
 
 * [Processing documentation](https://processing.org/reference/)
