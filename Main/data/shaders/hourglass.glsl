@@ -29,9 +29,11 @@ void main() {
         right_limit -= increment;
         y_pointer += increment;
         if(gl_FragCoord.x > left_limit && gl_FragCoord.x < right_limit && gl_FragCoord.y < y_pointer){
-            if(check_time(0.5, 0.3, 0.5, 0.0, st.y)) continue;
-            if(check_time(0.6, 0.5, 0.3, 0.0, st.y)) continue;
-            if(check_time(0.8, 0.6, 0.1, 0.0, st.y)) continue;
+            if(check_time(0.9, 0.8, 0.1, 0.0, st.y)) continue;
+            if(check_time(0.8, 0.7, 0.2, 0.0, st.y)) continue;
+            if(check_time(0.7, 0.6, 0.3, 0.0, st.y)) continue;
+            if(check_time(0.6, 0.5, 0.4, 0.0, st.y)) continue;
+            if(check_time(0.5, 0.0, 0.5, 0.0, st.y)) continue;
         }
     }
     
@@ -40,8 +42,10 @@ void main() {
         right_limit += increment;
         y_pointer += increment;
         if(gl_FragCoord.x > left_limit && gl_FragCoord.x < right_limit && gl_FragCoord.y > y_pointer){
-            if(check_time(1.0, 0.8, 1.0, 0.5, st.y)) continue;
-            if(check_time(0.8, 0.6, 0.8, 0.5, st.y)) continue;
+            if(check_time(1.0, 0.9, 1.0, 0.5, st.y)) continue;
+            if(check_time(0.9, 0.8, 0.9, 0.5, st.y)) continue;
+            if(check_time(0.8, 0.7, 0.8, 0.5, st.y)) continue;
+            if(check_time(0.7, 0.6, 0.7, 0.5, st.y)) continue;
             if(check_time(0.6, 0.5, 0.6, 0.5, st.y)) continue;
     	} 
     }
