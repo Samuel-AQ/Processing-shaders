@@ -2,7 +2,7 @@
 
 ## Description
 
-This is an applicaton that allows you to see two different GLSL filters.
+This is an applicaton that allows you to see two different GLSL filters, one of a colorful rainbow that alternates its shadows and another of a simulation of a hourglass.
 
 ## How it works
 
