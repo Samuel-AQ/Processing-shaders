@@ -1,38 +1,42 @@
 /**
-* @author: Samuel Arrocha Quevedo
-* @version: 28/04/2021
-*/
+ * @author: Samuel Arrocha Quevedo
+ * @version: 28/04/2021
+ */
 
 PShader shaders;
 boolean helpScreen, titleScreen;
 
-void setup(){
+void setup() {
   size(500, 500, P3D);
   shaders = loadShader("shaders/fragment.glsl", "shaders/vertex.glsl");
   helpScreen = false;
   titleScreen = false;
 }
 
-void draw(){
-  int boxSize = 200;
-  color black = color(0);
-  
-  background(black);
-  
-  if(titleScreen){
+void draw() {
+  int radius = 100;
+  color white = color(255);
+
+  background(white);
+
+  if (titleScreen) {
     showTitleScreen();
-  } else if(helpScreen){
+  } else if (helpScreen) {
     showHelpScreen();
   } else {
-    shaders.set("u_resolution", (float) width, (float) height);
-    shaders.set("u_time", millis() / 1000.0);
+    PImage texture = loadImage("images/texture.jpg");
+    PShape sphere = createShape(SPHERE, radius);
+
+    shaders.set("texture", texture);
     shader(shaders);
-    
+
+    //noStroke();
     translate(width / 2, height / 2);
     rotateY(radians(mouseX));
     rotateX(radians(mouseY));
-    box(boxSize);
-  } 
+    sphere.setTexture(texture); 
+    shape(sphere);
+  }
 }
 
 void showTitleScreen() {
@@ -66,7 +70,7 @@ void showHelpScreen() {
   text(controls, width / 2, height * 0.5);
 }
 
-void keyPressed(){
+void keyPressed() {
   if (keyCode == 'h' || keyCode == 'H') helpScreen = !helpScreen;
   if (keyCode == ENTER) titleScreen = false;
 }
