@@ -5,32 +5,36 @@
 
 PShader shaders;
 boolean helpScreen, titleScreen;
+float lightIntensity;
 
 void setup() {
   size(500, 500, P3D);
   shaders = loadShader("shaders/fragment.glsl", "shaders/vertex.glsl");
   helpScreen = false;
   titleScreen = false;
+  lightIntensity = 0.1;
 }
 
 void draw() {
   int radius = 100;
-  color white = color(255);
+  color black = color(0);
 
-  background(white);
+  background(black);
 
-  if (titleScreen) {
-    showTitleScreen();
-  } else if (helpScreen) {
+  if (titleScreen && helpScreen) {
     showHelpScreen();
+  } else if (titleScreen) {
+    showTitleScreen();
   } else {
     PImage texture = loadImage("images/texture.jpg");
     PShape sphere = createShape(SPHERE, radius);
 
     shaders.set("texture", texture);
+    shaders.set("lightIntensity", lightIntensity);
+    
     shader(shaders);
-
-    //noStroke();
+    
+    noStroke();
     translate(width / 2, height / 2);
     rotateY(radians(mouseX));
     rotateX(radians(mouseY));
@@ -70,7 +74,14 @@ void showHelpScreen() {
   text(controls, width / 2, height * 0.5);
 }
 
+// CONTROL METHODS
+
 void keyPressed() {
   if (keyCode == 'h' || keyCode == 'H') helpScreen = !helpScreen;
   if (keyCode == ENTER) titleScreen = false;
+}
+
+void mouseWheel(MouseEvent event) {
+  float constant = event.getCount() * 0.1;
+  lightIntensity += constant;
 }
