@@ -10,8 +10,8 @@ float lightIntensity, resolutionConstant;
 void setup() {
   size(500, 500, P3D);
   shaders = loadShader("shaders/fragment.glsl", "shaders/vertex.glsl");
-  helpScreen = false;
-  titleScreen = false;
+  helpScreen = true;
+  titleScreen = true;
   lightIntensity = 1.0;
   resolutionConstant = 100.0;
 }
@@ -19,14 +19,12 @@ void setup() {
 void draw() {
   int radius = 100;
   color black = color(0);
-
-  background(black);
-
-  if (titleScreen && helpScreen) {
-    showHelpScreen();
-  } else if (titleScreen) {
+  
+  if (titleScreen) {
     showTitleScreen();
   } else {
+    background(black);
+    if(helpScreen) showHelpScreen();
     PImage texture = loadImage("images/texture.jpg");
     PShape sphere = createShape(SPHERE, radius);
 
@@ -46,11 +44,12 @@ void draw() {
 
 void showTitleScreen() {
   color black = color(0);
+  color white = color(255);
   PImage titleImage = loadImage("images/title.png");
   String title = "SHADER EXAMPLES\n";
-  String info = "Press 'enter' to start\n"
-    + "Press 'H' to open help screen";
-
+  String info = "Press 'enter' to start";
+  
+  background(white);
   image(titleImage, width * 0.3, height * 0.25, 200, 200);
   textAlign(CENTER);
   fill(black);
@@ -61,22 +60,23 @@ void showTitleScreen() {
 }
 
 void showHelpScreen() {
-  color black = color(0);
-  String title = "HELP\n";
-  String controls = "Press 1 to run rainbow shader\n"
-    + "Press 2 to run hourglass shader\n"
-    + "Press 'H' to show or hide the help screen";
-
-  fill(black);
-  textAlign(CENTER);
-  textSize(30);
-  text(title, width / 2, height * 0.15);
-  textSize(20);
-  text(controls, width / 2, height * 0.5);
+  color white = color(255);
+  String controls = "· Move the mouse to rotate the sphere\n"
+    + "· Use the mouse wheel to increase or decrease the light\n"
+    + "· Press up key to increase resolution\n"
+    + "· Press down key to decrease resolution\n"
+    + "· Press H to hide or show help";
+  
+  resetShader();
+  pushMatrix();
+  fill(white);
+  textAlign(LEFT);
+  textSize(14);
+  text(controls, width * 0.05, height * 0.05);
+  popMatrix();
 }
 
 // CONTROL METHODS
-
 void keyPressed() {
   if (keyCode == 'h' || keyCode == 'H') helpScreen = !helpScreen;
   if (keyCode == ENTER) titleScreen = false;
@@ -89,7 +89,6 @@ void keyPressed() {
   if(keyCode == DOWN){
     if(resolutionConstant - 10.0 >= 0.0) resolutionConstant -= 10.0;
   }
-  println(resolutionConstant);
 }
 
 void mouseWheel(MouseEvent event) {
