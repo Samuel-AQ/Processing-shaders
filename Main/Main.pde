@@ -5,14 +5,15 @@
 
 PShader shaders;
 boolean helpScreen, titleScreen;
-float lightIntensity;
+float lightIntensity, resolutionConstant;
 
 void setup() {
   size(500, 500, P3D);
   shaders = loadShader("shaders/fragment.glsl", "shaders/vertex.glsl");
   helpScreen = false;
   titleScreen = false;
-  lightIntensity = 0.1;
+  lightIntensity = 1.0;
+  resolutionConstant = 100.0;
 }
 
 void draw() {
@@ -31,9 +32,9 @@ void draw() {
 
     shaders.set("texture", texture);
     shaders.set("lightIntensity", lightIntensity);
-    
+    shaders.set("resolutionConstant", resolutionConstant);
     shader(shaders);
-    
+
     noStroke();
     translate(width / 2, height / 2);
     rotateY(radians(mouseX));
@@ -79,9 +80,20 @@ void showHelpScreen() {
 void keyPressed() {
   if (keyCode == 'h' || keyCode == 'H') helpScreen = !helpScreen;
   if (keyCode == ENTER) titleScreen = false;
+  
+  // Resolution controls
+  if(keyCode == UP){
+    if(resolutionConstant + 10.0 <= 100.0) resolutionConstant += 10.0;
+  }
+  
+  if(keyCode == DOWN){
+    if(resolutionConstant - 10.0 >= 0.0) resolutionConstant -= 10.0;
+  }
+  println(resolutionConstant);
 }
 
 void mouseWheel(MouseEvent event) {
-  float constant = event.getCount() * 0.1;
-  lightIntensity += constant;
+  float constant = event.getCount() * (-0.05);
+  if (constant < 0 && lightIntensity - constant >= 0.0) lightIntensity += constant;
+  if (constant > 0 && lightIntensity + constant <= 1.0) lightIntensity += constant;
 }
