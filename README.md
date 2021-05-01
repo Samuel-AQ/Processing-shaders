@@ -20,7 +20,7 @@ This application has been developed according to the principles of Jakob Nielsen
 
 ## Demonstration
 
-![Demonstration gif](https://github.com/Samuel-AQ/Processing-shaders/blob/master/Main/data/images/demonstration.gif?raw=true)
+![Demonstration gif](https://github.com/Samuel-AQ/Processing-shaders/blob/vertex-shader/Main/data/images/demonstration.gif?raw=true)
 
 ## References
 
